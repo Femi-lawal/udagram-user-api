@@ -7,7 +7,11 @@ const router: Router = Router();
 
 router.use('/auth', AuthRouter);
 
-router.get('/');
+// Get all feed items
+router.get('/', async (req: Request, res: Response) => {
+  const items = await User.findAndCountAll();
+  res.send(items);
+});
 
 router.get('/:id', async (req: Request, res: Response) => {
   const {id} = req.params;
